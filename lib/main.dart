@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system,
-          home: const ListScrollTest(),
+          home: const BottomNavigationBar(),
         );
       },
     );
@@ -157,14 +157,14 @@ class _ListScrollTestState extends State<ListScrollTest> {
   }
 }
 
-class NavigationExample extends StatefulWidget {
-  const NavigationExample({super.key});
+class BottomNavigationBar extends StatefulWidget {
+  const BottomNavigationBar({super.key});
 
   @override
-  State<NavigationExample> createState() => _NavigationExampleState();
+  State<BottomNavigationBar> createState() => _BottomNavigationBarState();
 }
 
-class _NavigationExampleState extends State<NavigationExample> {
+class _BottomNavigationBarState extends State<BottomNavigationBar> {
   int currentPageIndex = 0;
 
   @override
@@ -181,17 +181,19 @@ class _NavigationExampleState extends State<NavigationExample> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            icon: Icon(Icons.school),
+            selectedIcon: Icon(Icons.school),
+            label: 'Learn',
           ),
           NavigationDestination(
-            icon: Badge(child: Icon(Icons.notifications_sharp)),
-            label: 'Notifications',
+            icon: Icon(Icons.amp_stories),
+            selectedIcon: Icon(Icons.amp_stories),
+            label: 'Decks',
           ),
           NavigationDestination(
-            icon: Badge(label: Text('2'), child: Icon(Icons.messenger_sharp)),
-            label: 'Messages',
+            icon: Icon(Icons.settings),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
