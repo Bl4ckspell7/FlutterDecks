@@ -1,6 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart' show DynamicColorBuilder;
 import 'package:flutter/material.dart' hide BottomNavigationBar;
-import 'package:flutter_decks/src/core/bottom_navigation_bar.dart';
+import 'package:flutter_decks/src/presentation/bottom_navigation_bar.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

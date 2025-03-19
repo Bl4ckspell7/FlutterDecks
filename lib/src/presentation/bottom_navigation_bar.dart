@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_decks/src/feature/decks_page.dart' show DecksPage;
-import 'package:flutter_decks/src/feature/learn_page.dart' show LearnPage;
-import 'package:flutter_decks/src/feature/settings_page.dart' show SettingsPage;
+import 'package:flutter_decks/src/presentation/feature/decks_page.dart'
+    show DecksPage;
+import 'package:flutter_decks/src/presentation/feature/learn_page.dart'
+    show LearnPage;
+import 'package:flutter_decks/src/presentation/feature/settings_page.dart'
+    show SettingsPage;
 
 class BottomNavigationBar extends StatefulWidget {
   const BottomNavigationBar({super.key});
