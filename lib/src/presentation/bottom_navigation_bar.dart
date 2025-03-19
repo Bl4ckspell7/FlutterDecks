@@ -49,13 +49,13 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
       body:
           <Widget>[
             /// Learn page
-            LearnPage(theme: theme),
+            LearnPage(),
 
             /// Decks page
-            DecksPage(theme: theme),
+            DecksPage(),
 
             /// Settings page,
-            SettingsPage(theme: theme),
+            SettingsPage(),
           ][currentPageIndex],
     );
   }

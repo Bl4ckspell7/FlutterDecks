@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
 class ListScrollTest extends StatefulWidget {
-  const ListScrollTest({super.key});
+  final int listSize;
+  const ListScrollTest({super.key, required this.listSize});
 
   @override
   State<ListScrollTest> createState() => _ListScrollTestState();
 }
 
 class _ListScrollTestState extends State<ListScrollTest> {
-  final List<int> _items = List<int>.generate(100, (int index) => index);
+  late final List<int> _items;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = List<int>.generate(widget.listSize, (int index) => index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class _ListScrollTestState extends State<ListScrollTest> {
         itemCount: _items.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text('Item $index'),
+            title: Text('Item ${_items[index]}'),
             onTap: () {
               setState(() {
                 _items.removeAt(index);

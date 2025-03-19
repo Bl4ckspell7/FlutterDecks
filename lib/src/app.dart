@@ -1,10 +1,16 @@
 import 'package:dynamic_color/dynamic_color.dart' show DynamicColorBuilder;
 import 'package:flutter/material.dart' hide BottomNavigationBar;
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_decks/src/presentation/bottom_navigation_bar.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+  @override
+  MyAppState createState() => MyAppState();
+}
 
+class MyAppState extends State<MyApp> {
   static final _defaultLightColorScheme = ColorScheme.fromSwatch(
     primarySwatch: Colors.blue,
     brightness: Brightness.light,
@@ -14,6 +20,12 @@ class MyApp extends StatelessWidget {
     primarySwatch: Colors.blue,
     brightness: Brightness.dark,
   );
+
+  @override
+  void initState() {
+    setOptimalDisplayMode();
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
@@ -35,5 +47,36 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> setOptimalDisplayMode() async {
+    List<DisplayMode> supportedModes = <DisplayMode>[];
+
+    try {
+      supportedModes = await FlutterDisplayMode.supported;
+    } on PlatformException {
+      /// e.code =>
+      /// noAPI - No API support. Only Marshmallow and above.
+      /// noActivity - Activity is not available. Probably app is in background.
+    }
+
+    final DisplayMode active = await FlutterDisplayMode.active;
+
+    final List<DisplayMode> sameResolution =
+        supportedModes
+            .where(
+              (DisplayMode m) =>
+                  m.width == active.width && m.height == active.height,
+            )
+            .toList()
+          ..sort(
+            (DisplayMode a, DisplayMode b) =>
+                b.refreshRate.compareTo(a.refreshRate),
+          );
+
+    final DisplayMode mostOptimalMode =
+        sameResolution.isNotEmpty ? sameResolution.first : active;
+
+    await FlutterDisplayMode.setPreferredMode(mostOptimalMode);
   }
 }
