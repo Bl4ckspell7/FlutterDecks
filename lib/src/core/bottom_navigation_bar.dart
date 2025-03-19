@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_decks/src/feature/decks_page.dart' show DecksPage;
+import 'package:flutter_decks/src/feature/learn_page.dart' show LearnPage;
+import 'package:flutter_decks/src/feature/settings_page.dart' show SettingsPage;
+
+class BottomNavigationBar extends StatefulWidget {
+  const BottomNavigationBar({super.key});
+
+  @override
+  State<BottomNavigationBar> createState() => _BottomNavigationBarState();
+}
+
+class _BottomNavigationBarState extends State<BottomNavigationBar> {
+  int currentPageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: null,
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.school),
+            selectedIcon: Icon(Icons.school),
+            label: 'Learn',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.amp_stories),
+            selectedIcon: Icon(Icons.amp_stories),
+            label: 'Decks',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
+      body:
+          <Widget>[
+            /// Learn page
+            LearnPage(theme: theme),
+
+            /// Decks page
+            DecksPage(theme: theme),
+
+            /// Settings page,
+            SettingsPage(theme: theme),
+          ][currentPageIndex],
+    );
+  }
+}
