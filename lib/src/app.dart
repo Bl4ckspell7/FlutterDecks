@@ -4,13 +4,13 @@ import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_decks/src/presentation/bottom_navigation_bar.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class FlutterDecksApp extends StatefulWidget {
+  const FlutterDecksApp({super.key});
   @override
-  MyAppState createState() => MyAppState();
+  FlutterDecksAppState createState() => FlutterDecksAppState();
 }
 
-class MyAppState extends State<MyApp> {
+class FlutterDecksAppState extends State<FlutterDecksApp> {
   static final _defaultLightColorScheme = ColorScheme.fromSwatch(
     primarySwatch: Colors.blue,
     brightness: Brightness.light,
