@@ -18,3 +18,10 @@ flutter build apk
 ```bash
 dart run flutter_launcher_icons
 ```
+
+### Generate native splash
+1. place used files (app icon/background/branding) inside [./assets/splash/](./assets/splash/)
+2. adjust config [./flutter_native_splash.yaml](./flutter_native_splash.yaml) if necessary
+```bash
+dart run flutter_native_splash:create
+```
