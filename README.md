@@ -1,4 +1,6 @@
 # FlutterDecks
+[![Flutter Build](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/build.yaml/badge.svg)](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/build.yaml)
+
 A modern flashcard learning app built with Flutter.
 
 ### Run
