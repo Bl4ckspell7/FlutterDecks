@@ -64,7 +64,9 @@ jobs:
           flutter build ipa --no-codesign
           mkdir -p Payload
           cp -r build/ios/iphoneos/Runner.app Payload/
-          zip -r app-release.ipa Payload
+          mkdir -p build/ios
+          zip -r build/ios/app-release.ipa Payload
+          rm -rf Payload
 
       - name: Upload APK
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -82,4 +84,4 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: app-release.ipa
-          path: app-release.ipa
+          path: build/ios/app-release.ipa
