@@ -27,3 +27,9 @@ dart run flutter_launcher_icons
 ```bash
 dart run flutter_native_splash:create
 ```
+
+## Create Release
+```bash
+git tag -a v0.0.1 -m "version 0.0.1"
+git push origin v0.0.1
+```
