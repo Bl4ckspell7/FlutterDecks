@@ -1,4 +1,6 @@
-name: Release
+name: Release Mobile
+# This workflow builds the mobile app for Android and iOS platforms
+# using Flutter and creates a release with the generated APK, App Bundle, and IPA files.
 
 on:
   push:
