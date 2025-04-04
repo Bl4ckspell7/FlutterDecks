@@ -60,7 +60,7 @@ jobs:
         run: |
           flutter build ipa --no-codesign
           mkdir -p Payload
-          cp -r build/ios/iphoneos/Runner.app Payload/
+          cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
           mkdir -p build/ios
           zip -r build/ios/app-release.ipa Payload
           rm -rf Payload
