@@ -66,14 +66,23 @@ jobs:
           cd build
           tar -czf ios_build.tar.gz ios
 
-      - name: Upload Artifacts
+      - name: Upload APK
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: Releases
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-            build/ios_build.tar.gz
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
+      - name: Upload iOS Build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ios_build.tar.gz
+          path: build/ios_build.tar.gz
 
       - name: Extract version from pubspec.yaml
         id: extract_version
