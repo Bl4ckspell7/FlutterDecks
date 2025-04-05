@@ -12,21 +12,17 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4.2.1
         with:
           path: all-artifacts/
 
-      - name: Flatten artifacts
-        run: |
-          mkdir flattened-artifacts
-          find all-artifacts -type f -exec cp {} flattened-artifacts/ \;
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda # v2.2.1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: flattened-artifacts/**
+          files: all-artifacts/**
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
