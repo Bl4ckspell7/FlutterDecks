@@ -66,6 +66,13 @@ jobs:
           flutter build linux --release
           cp build/linux/x64/release/bundle/flutter_decks artifacts/app-release-linux
 
+      - name: Upload Linux Artifact
+        if: matrix.build_linux == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-release-linux
+          path: artifacts/app-release-linux
+
       # === Android APK and App Bundle ===
       - name: Decode Keystore
         if: matrix.build_apk == true || matrix.build_appbundle == true
@@ -86,20 +93,41 @@ jobs:
           flutter build apk --release
           cp build/app/outputs/flutter-apk/app-release.apk artifacts/
 
+      - name: Upload APK Artifact
+        if: matrix.build_apk == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-release.apk
+          path: artifacts/app-release.apk
+
       - name: Build App Bundle and Move to Artifacts
         if: matrix.build_appbundle == true
         run: |
           flutter build appbundle --release
           cp build/app/outputs/bundle/release/app-release.aab artifacts/
 
+      - name: Upload App Bundle Artifact
+        if: matrix.build_appbundle == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-release.aab
+          path: artifacts/app-release.aab
+
       # === iOS
-      - name: Build IPA
+      - name: Build iOS
         if: matrix.build_ios == true
         run: |
           flutter build ipa --no-codesign --release
           mkdir -p Payload
           cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
           zip -r artifacts/app-release.ipa Payload
+
+      - name: Upload iOS Artifact
+        if: matrix.build_ios == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: app-release.ipa
+          path: artifacts/app-release.ipa
 
       # === macOS App
       - name: Build macOS App and Move to Artifacts
@@ -108,6 +136,13 @@ jobs:
           flutter build macos --release
           cp -r build/macos/Build/Products/Release/flutter_decks.app artifacts/
 
+      - name: Upload macOS Artifact
+        if: matrix.build_macos == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: flutter_decks.app
+          path: artifacts/flutter_decks.app
+
       # === Windows
       - name: Build Windows Executable and Move to Artifacts
         if: matrix.build_windows == true
@@ -115,9 +150,9 @@ jobs:
           flutter build windows --release
           copy build\windows\x64\runner\Release\flutter_decks.exe artifacts\app-release.exe
 
-      # === Upload all collected artifacts
-      - name: Upload All Artifacts
+      - name: Upload Windows Artifact
+        if: matrix.build_windows == true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: artifacts-${{ matrix.os }}
-          path: artifacts/
+          name: app-release.exe
+          path: artifacts/app-release.exe
