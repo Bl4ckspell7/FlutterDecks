@@ -55,35 +55,30 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
 
+      - name: Make artifacts dir
+        run: |
+          mkdir -p artifacts
+
       - name: Build APK
         run: flutter build apk --release
 
       - name: Build appBundle
         run: flutter build appbundle
 
-      - name: Build IPA Archive
+      - name: Build IPA
         run: |
           flutter build ipa --no-codesign
           mkdir -p Payload
           cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
-          mkdir -p build/ios
-          zip -r build/ios/app-release.ipa Payload
-          rm -rf Payload
+          zip -r artifacts/app-release.ipa Payload
 
-      - name: Upload APK
+      - name: Move APK & AAB to artifacts
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk artifacts/
+          cp build/app/outputs/bundle/release/app-release.aab artifacts/
+
+      - name: Upload All Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-
-      - name: Upload App Bundle
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: app-release.aab
-          path: build/app/outputs/bundle/release/app-release.aab
-
-      - name: Upload iOS Build
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: app-release.ipa
-          path: build/ios/app-release.ipa
+          name: artifacts
+          path: artifacts/**
