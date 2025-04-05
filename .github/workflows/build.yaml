@@ -118,7 +118,7 @@ jobs:
         if: matrix.build_windows == true
         run: |
           flutter build windows --release
-          copy build\windows\runner\Release\flutter_decks.exe artifacts\app-release.exe
+          copy build\windows\x64\runner\Release\flutter_decks.exe artifacts\app-release.exe
 
       # === Upload all collected artifacts
       - name: Upload All Artifacts
