@@ -106,7 +106,7 @@ jobs:
         if: matrix.build_macos == true
         run: |
           flutter build macos --release
-          cp -r build/macos/Build/Products/Release/*.app artifacts/
+          cp -r build/macos/Build/Products/Release/flutter_decks.app artifacts/
 
       # === Windows
       - name: Build Windows Executable and Move to Artifacts
