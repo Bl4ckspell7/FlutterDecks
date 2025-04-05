@@ -12,7 +12,19 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            build_linux: true
+            build_apk: true
+            build_appbundle: true
+          - os: macos-13
+            build_ios: true
+            build_macos: true
+          - os: windows-latest
+            build_windows: true
 
     steps:
       - name: Checkout Repository
@@ -44,41 +56,71 @@ jobs:
       - name: Analyze project source
         run: flutter analyze
 
+      - name: Make artifacts dir
+        shell: bash
+        run: mkdir -p artifacts
+
+      # === Linux
+      - name: Build and Move Linux Executable
+        if: matrix.build_linux == true
+        run: |
+          flutter build linux --release
+          cp build/linux/x64/release/bundle/flutter_decks artifacts/app-release-linux
+
+      # === Android APK and App Bundle ===
       - name: Decode Keystore
+        if: matrix.build_apk == true || matrix.build_appbundle == true
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
 
       - name: Create key.properties
+        if: matrix.build_apk == true || matrix.build_appbundle == true
         run: |
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
 
-      - name: Make artifacts dir
+      # === Android APK
+      - name: Build APK and Move to Artifacts
+        if: matrix.build_apk == true
         run: |
-          mkdir -p artifacts
+          flutter build apk --release
+          cp build/app/outputs/flutter-apk/app-release.apk artifacts/
 
-      - name: Build APK
-        run: flutter build apk --release
+      # === Android App Bundle
+      - name: Build App Bundle and Move to Artifacts
+        if: matrix.build_appbundle == true
+        run: |
+          flutter build appbundle --release
+          cp build/app/outputs/bundle/release/app-release.aab artifacts/
 
-      - name: Build appBundle
-        run: flutter build appbundle
-
+      # === iOS
       - name: Build IPA
+        if: matrix.build_ios == true
         run: |
-          flutter build ipa --no-codesign
+          flutter build ipa --no-codesign --release
           mkdir -p Payload
           cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
           zip -r artifacts/app-release.ipa Payload
 
-      - name: Move APK & AAB to artifacts
+      # === macOS App
+      - name: Build macOS App and Move to Artifacts
+        if: matrix.build_macos == true
         run: |
-          cp build/app/outputs/flutter-apk/app-release.apk artifacts/
-          cp build/app/outputs/bundle/release/app-release.aab artifacts/
+          flutter build macos --release
+          cp -r build/macos/Build/Products/Release/*.app artifacts/
 
+      # === Windows
+      - name: Build Windows Executable and Move to Artifacts
+        if: matrix.build_windows == true
+        run: |
+          flutter build windows --release
+          copy build\windows\runner\Release\flutter_decks.exe artifacts\app-release.exe
+
+      # === Upload all collected artifacts
       - name: Upload All Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: artifacts
-          path: artifacts/**
+          path: artifacts/
