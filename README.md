@@ -29,7 +29,13 @@ dart run flutter_native_splash:create
 ```
 
 ## Create Release
+Create tags:
 ```bash
 git tag -a v0.0.1 -m "version 0.0.1"
 git push origin v0.0.1
+```
+Delete tags:
+```bash
+git tag -d v0.0.1
+git push origin :refs/tags/v0.0.1
 ```
