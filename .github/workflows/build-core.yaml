@@ -15,7 +15,7 @@ jobs:
             build_appbundle: false
           - os: macos-13
             build_ios: false
-            build_macos: false
+            build_macos: true
           - os: windows-latest
             build_windows: false
 
@@ -130,18 +130,20 @@ jobs:
           path: artifacts/app-release.ipa
 
       # === macOS App
-      - name: Build macOS App and Move to Artifacts
+      - name: Build and Compress macOS App
         if: matrix.build_macos == true
         run: |
           flutter build macos --release
           cp -r build/macos/Build/Products/Release/flutter_decks.app artifacts/
+          cd artifacts        
+          zip -r app-release-macos.zip flutter_decks.app
 
       - name: Upload macOS Artifact
         if: matrix.build_macos == true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: flutter_decks.app
-          path: artifacts/flutter_decks.app
+          name: app-release-macos.zip
+          path: artifacts/app-release-macos.zip
 
       # === Windows
       - name: Build Windows Executable and Move to Artifacts
