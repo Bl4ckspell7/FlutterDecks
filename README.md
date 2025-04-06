@@ -1,6 +1,6 @@
 # FlutterDecks
-[![Build](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/build.yaml/badge.svg)](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/build.yaml)
-[![Release](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/release.yaml/badge.svg)](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/release.yaml)
+![](https://github.com/Bl4ckspell7/FlutterDecks/actions/workflows/build.yaml/badge.svg)
+![](https://img.shields.io/github/v/release/Bl4ckspell7/FlutterDecks)
 
 
 A modern flashcard learning app built with Flutter.
