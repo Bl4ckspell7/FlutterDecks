@@ -64,7 +64,7 @@ jobs:
         if: matrix.build_linux == true
         run: |
           flutter build linux --release
-          tar -cJf artifacts/app-release-linux.tar.xz -C build/linux/x64/release/bundle/
+          tar -cJf artifacts/app-release-linux.tar.xz -C build/linux/x64/release/bundle/ .
 # cp -r build/linux/x64/release/bundle/ artifacts/app-release-linux
 
       - name: Upload Linux Artifact
