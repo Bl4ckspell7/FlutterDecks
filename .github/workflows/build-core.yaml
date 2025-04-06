@@ -11,13 +11,13 @@ jobs:
         include:
           - os: ubuntu-22.04
             build_linux: true
-            build_apk: false
-            build_appbundle: false
+            build_apk: true
+            build_appbundle: true
           - os: macos-13
-            build_ios: false
+            build_ios: true
             build_macos: true
           - os: windows-latest
-            build_windows: false
+            build_windows: true
 
     steps:
       - name: Checkout Repository
@@ -70,7 +70,7 @@ jobs:
         if: matrix.build_linux == true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: app-release-linux
+          name: app-release-linux.tar.xz
           path: artifacts/app-release-linux.tar.xz
 
       # === Android APK and App Bundle ===
@@ -135,7 +135,7 @@ jobs:
         run: |
           flutter build macos --release
           cp -r build/macos/Build/Products/Release/flutter_decks.app artifacts/
-          cd artifacts        
+          cd artifacts
           zip -r app-release-macos.zip flutter_decks.app
 
       - name: Upload macOS Artifact
