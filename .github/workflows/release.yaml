@@ -24,12 +24,12 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            all-artifacts/app-release-linux.tar.xz/app-release-linux.tar.xz
+            all-artifacts/app-release-linux/app-release-linux
             all-artifacts/app-release.aab/app-release.aab
             all-artifacts/app-release.apk/app-release.apk
             all-artifacts/app-release.exe/app-release.exe
             all-artifacts/app-release.ipa/app-release.ipa
-            all-artifacts/app-release-macos.zip/app-release-macos.zip
+            all-artifacts/flutter_decks.app/flutter_decks.app
 
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
