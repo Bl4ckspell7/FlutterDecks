@@ -11,10 +11,10 @@ jobs:
         include:
           - os: ubuntu-22.04
             build_linux: true
-            build_apk: true
-            build_appbundle: true
+            build_apk: false
+            build_appbundle: false
           - os: macos-13
-            build_ios: true
+            build_ios: false
             build_macos: true
           - os: windows-latest
             build_windows: true
