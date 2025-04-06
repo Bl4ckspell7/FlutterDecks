@@ -19,6 +19,12 @@ jobs:
         with:
           merge-multiple: true
 
+      - name: List artifacts
+        run: |
+          echo "Artifacts:"
+          ls
+          echo "Listed artifacts!"
+
       - name: Compress Linux artifact
         run: |
           tar -cJf app-release-linux.tar.xz app-release-linux
