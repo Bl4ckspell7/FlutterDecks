@@ -64,7 +64,7 @@ jobs:
         if: matrix.build_linux == true
         run: |
           flutter build linux --release
-          cp build/linux/x64/release/bundle/ artifacts/app-release-linux
+          cp -r build/linux/x64/release/bundle/ artifacts/app-release-linux
 
       - name: Upload Linux Artifact
         if: matrix.build_linux == true
