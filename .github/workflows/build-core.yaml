@@ -60,18 +60,18 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y ninja-build libgtk-3-dev
 
-      - name: Build and Move Linux Executable
+      - name: Build and Compress Linux Bundle
         if: matrix.build_linux == true
         run: |
           flutter build linux --release
-          cp -r build/linux/x64/release/bundle/ artifacts/app-release-linux
+          tar -cJf artifacts/app-release-linux.tar.xz -C build/linux/x64/release/bundle .
 
       - name: Upload Linux Artifact
         if: matrix.build_linux == true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: app-release-linux
-          path: artifacts/app-release-linux
+          path: artifacts/app-release-linux.tar.xz
 
       # === Android APK and App Bundle ===
       - name: Decode Keystore
@@ -134,14 +134,15 @@ jobs:
         if: matrix.build_macos == true
         run: |
           flutter build macos --release
-          cp -r build/macos/Build/Products/Release/flutter_decks.app artifacts/
+          cd build/macos/Build/Products/Release/
+          zip -r ../../../../../artifacts/flutter_decks.app.zip flutter_decks.app
 
       - name: Upload macOS Artifact
         if: matrix.build_macos == true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: flutter_decks.app
-          path: artifacts/flutter_decks.app
+          name: app-release-macos.zip
+          path: artifacts/app-release-macos.zip
 
       # === Windows
       - name: Build Windows Executable and Move to Artifacts
