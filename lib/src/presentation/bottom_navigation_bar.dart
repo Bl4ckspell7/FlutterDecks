@@ -29,17 +29,17 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.school_outlined),
             selectedIcon: Icon(Icons.school),
             label: 'Learn',
           ),
           NavigationDestination(
-            icon: Icon(Icons.amp_stories),
+            icon: Icon(Icons.amp_stories_outlined),
             selectedIcon: Icon(Icons.amp_stories),
             label: 'Decks',
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
             selectedIcon: Icon(Icons.settings),
             label: 'Settings',
           ),
