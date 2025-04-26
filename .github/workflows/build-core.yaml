@@ -43,6 +43,9 @@ jobs:
           channel: "stable"
           cache: true
 
+      - name: Accept Android SDK Licenses
+        run: yes | sdkmanager --licenses
+
       - name: Install dependencies
         run: flutter pub get
 
