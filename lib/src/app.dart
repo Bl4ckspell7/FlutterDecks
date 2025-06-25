@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:dynamic_color/dynamic_color.dart' show DynamicColorBuilder;
 import 'package:flutter/material.dart' hide BottomNavigationBar;
 import 'package:flutter/services.dart' show PlatformException;
@@ -23,8 +25,10 @@ class FlutterDecksAppState extends State<FlutterDecksApp> {
 
   @override
   void initState() {
-    setOptimalDisplayMode();
     super.initState();
+    if (Platform.isAndroid) {
+      setOptimalDisplayMode();
+    }
   }
 
   // This widget is the root of your application.
