@@ -13,7 +13,7 @@ jobs:
             build_linux: true
             build_apk: true
             build_appbundle: true
-          - os: macos-13
+          - os: macos-15
             build_ios: true
             build_macos: true
           - os: windows-latest
