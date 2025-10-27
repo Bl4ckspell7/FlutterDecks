@@ -71,7 +71,7 @@ jobs:
 
       - name: Upload Linux Artifact
         if: matrix.build_linux == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release-linux.tar.xz
           path: artifacts/app-release-linux.tar.xz
@@ -98,7 +98,7 @@ jobs:
 
       - name: Upload APK Artifact
         if: matrix.build_apk == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release.apk
           path: artifacts/app-release.apk
@@ -111,7 +111,7 @@ jobs:
 
       - name: Upload App Bundle Artifact
         if: matrix.build_appbundle == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release.aab
           path: artifacts/app-release.aab
@@ -127,7 +127,7 @@ jobs:
 
       - name: Upload iOS Artifact
         if: matrix.build_ios == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release.ipa
           path: artifacts/app-release.ipa
@@ -143,7 +143,7 @@ jobs:
 
       - name: Upload macOS Artifact
         if: matrix.build_macos == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release-macos.zip
           path: artifacts/app-release-macos.zip
@@ -157,7 +157,7 @@ jobs:
 
       - name: Upload Windows Artifact
         if: matrix.build_windows == true
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: app-release.exe
           path: artifacts/app-release.exe
