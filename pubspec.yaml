@@ -39,7 +39,7 @@ dependencies:
   flutter_displaymode: ^0.7.0
   flutter_native_splash: ^2.4.5
   drift: ^2.26.0
-  drift_flutter: ^0.2.4
+  drift_flutter: ^0.3.0
   shared_preferences: ^2.5.3
 
 dev_dependencies:
